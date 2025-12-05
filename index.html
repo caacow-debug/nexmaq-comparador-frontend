@@ -35,11 +35,6 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.95;
-        }
-
         .search-box {
             background: white;
             padding: 30px;
@@ -60,7 +55,6 @@
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 16px;
-            transition: border-color 0.3s;
         }
 
         input[type="text"]:focus {
@@ -102,17 +96,13 @@
             gap: 10px;
         }
 
-        .filter-group label {
-            font-weight: 600;
-            color: #555;
-        }
-
         select {
-            padding: 10px;
+            padding: 10px 15px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 14px;
             cursor: pointer;
+            background: white;
         }
 
         .loading {
@@ -142,15 +132,15 @@
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 20px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
         .stat-item {
             text-align: center;
+            padding: 15px;
         }
 
         .stat-value {
@@ -160,147 +150,157 @@
         }
 
         .stat-label {
-            font-size: 14px;
+            font-size: 13px;
             color: #666;
             margin-top: 5px;
         }
 
-        .results {
+        .debug-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .debug-section summary {
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            color: #667eea;
+            padding: 10px;
+            user-select: none;
+        }
+
+        .debug-section summary:hover {
+            background: #f9fafb;
+            border-radius: 5px;
+        }
+
+        .debug-content {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .debug-table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .debug-table th,
+        .debug-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .debug-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .debug-table tr:hover {
+            background: #f3f4f6;
+        }
+
+        .store-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .store-badge.nexmaq {
+            background: #667eea;
+            color: white;
+        }
+
+        .store-badge.competitor {
+            background: #10b981;
+            color: white;
+        }
+
+        .results-grid {
             display: grid;
-            gap: 25px;
+            gap: 20px;
         }
 
         .product-card {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
 
-        .product-header {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #f0f0f0;
-        }
-
-        .product-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .product-store {
-            font-size: 14px;
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .price-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .price-item {
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-
-        .price-item:hover {
+        .product-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .price-item.nexmaq {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.05);
-        }
-
-        .price-item.best-price {
-            border-color: #10b981;
-            background: rgba(16, 185, 129, 0.05);
-        }
-
-        .store-label {
-            font-size: 12px;
+        .product-name {
+            font-size: 18px;
             font-weight: 700;
-            text-transform: uppercase;
-            color: #666;
+            color: #1f2937;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .store-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-bottom: 8px;
         }
 
-        .price-item.nexmaq .store-label {
+        .store-name {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            flex: 1;
+        }
+
+        .store-name.nexmaq {
             color: #667eea;
         }
 
-        .price-item.best-price .store-label {
+        .store-name.competitor {
             color: #10b981;
         }
 
-        .price-value {
+        .price {
             font-size: 24px;
             font-weight: 700;
-            color: #333;
-            margin-bottom: 10px;
+            color: #667eea;
         }
 
-        .price-link {
+        .product-link {
             display: inline-block;
-            padding: 8px 16px;
+            margin-top: 12px;
+            padding: 10px 20px;
             background: #667eea;
             color: white;
             text-decoration: none;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             transition: opacity 0.3s;
         }
 
-        .price-link:hover {
+        .product-link:hover {
             opacity: 0.9;
-        }
-
-        .price-item.best-price .price-link {
-            background: #10b981;
-        }
-
-        .best-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            background: #10b981;
-            color: white;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-left: 8px;
-        }
-
-        .debug-info {
-            background: #f3f4f6;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-family: monospace;
-            font-size: 12px;
-            color: #374151;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .debug-info summary {
-            cursor: pointer;
-            font-weight: 700;
-            margin-bottom: 10px;
-            user-select: none;
         }
 
         .no-results {
             text-align: center;
-            padding: 60px;
+            padding: 60px 20px;
             background: white;
             border-radius: 15px;
             color: #666;
@@ -313,6 +313,7 @@
             border-radius: 10px;
             margin-bottom: 20px;
             text-align: center;
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
@@ -326,16 +327,14 @@
 
             .filters {
                 flex-direction: column;
-                align-items: stretch;
             }
 
             .filter-group {
-                flex-direction: column;
-                align-items: stretch;
+                width: 100%;
             }
 
-            .price-section {
-                grid-template-columns: 1fr;
+            .filter-group select {
+                width: 100%;
             }
         }
     </style>
@@ -344,7 +343,7 @@
     <div class="container">
         <div class="header">
             <h1>🔍 Comparador de Precios NexMaq</h1>
-            <p>Compara precios de NexMaq con Vielco, Rembrak y CGC</p>
+            <p style="opacity: 0.95; font-size: 1.1em;">Encuentra los mejores precios del mercado</p>
         </div>
 
         <div class="search-box">
@@ -352,28 +351,31 @@
                 <input 
                     type="text" 
                     id="searchInput" 
-                    placeholder="Ej: generador, motobomba, hidrolavadora, soldadora..." 
+                    placeholder="Busca: generador, motobomba, hidrolavadora, soldadora..." 
                     onkeypress="if(event.key === 'Enter') searchProducts()"
                 >
-                <button onclick="searchProducts()" id="searchBtn">🔍 Comparar Precios</button>
+                <button onclick="searchProducts()" id="searchBtn">🔍 Buscar</button>
             </div>
             
             <div class="filters">
                 <div class="filter-group">
-                    <label>Ordenar por:</label>
-                    <select id="sortBy" onchange="applySorting()">
-                        <option value="name">Nombre A-Z</option>
-                        <option value="price-low">Precio: Menor a Mayor</option>
-                        <option value="price-high">Precio: Mayor a Menor</option>
+                    <label style="font-weight: 600; color: #555;">Ver:</label>
+                    <select id="filterStore" onchange="applyFilters()">
+                        <option value="all">Todos los productos</option>
+                        <option value="nexmaq">Solo NexMaq</option>
+                        <option value="vielco">Solo Vielco</option>
+                        <option value="rembrak">Solo Rembrak</option>
+                        <option value="cgc">Solo CGC</option>
                     </select>
                 </div>
                 
                 <div class="filter-group">
-                    <label>Filtrar:</label>
-                    <select id="filterStore" onchange="applyFilters()">
-                        <option value="all">Todas las tiendas</option>
-                        <option value="nexmaq">Solo NexMaq</option>
-                        <option value="competitors">Solo Competencia</option>
+                    <label style="font-weight: 600; color: #555;">Ordenar:</label>
+                    <select id="sortBy" onchange="applySorting()">
+                        <option value="default">Por relevancia</option>
+                        <option value="price-low">Precio: Menor a Mayor</option>
+                        <option value="price-high">Precio: Mayor a Menor</option>
+                        <option value="name">Nombre A-Z</option>
                     </select>
                 </div>
             </div>
@@ -381,26 +383,26 @@
 
         <div id="stats" class="stats" style="display: none;"></div>
         
-        <div id="debug" class="debug-info" style="display: none;">
+        <div id="debug" class="debug-section" style="display: none;">
             <details>
-                <summary>🔍 Ver información de debug (click para expandir)</summary>
-                <div id="debugContent"></div>
+                <summary>🔍 Ver información técnica (debug)</summary>
+                <div id="debugContent" class="debug-content"></div>
             </details>
         </div>
         
         <div id="loading" class="loading" style="display: none;">
             <div class="spinner"></div>
-            <p>Comparando precios en todas las tiendas...</p>
+            <p>Buscando en todas las tiendas...</p>
         </div>
         
         <div id="error" class="error" style="display: none;"></div>
-        <div id="results" class="results"></div>
+        <div id="results" class="results-grid"></div>
     </div>
 
     <script>
         const API_URL = 'https://nexmaq-comparador-production.up.railway.app';
         let allProducts = [];
-        let rawProducts = [];
+        let filteredProducts = [];
 
         async function searchProducts() {
             const query = document.getElementById('searchInput').value.trim();
@@ -425,33 +427,41 @@
             searchBtn.disabled = true;
 
             try {
+                console.log('Buscando:', query);
                 const response = await fetch(`${API_URL}/api/search?q=${encodeURIComponent(query)}`);
                 
                 if (!response.ok) {
-                    throw new Error('Error en la búsqueda');
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
                 const data = await response.json();
+                console.log('Respuesta del API:', data);
+                
                 loadingDiv.style.display = 'none';
                 searchBtn.disabled = false;
 
                 if (data.results && data.results.length > 0) {
-                    rawProducts = data.results;
-                    allProducts = processProducts(rawProducts);
+                    allProducts = data.results.map(p => ({
+                        ...p,
+                        storeLower: p.store.toLowerCase().trim(),
+                        isNexmaq: detectNexmaq(p)
+                    }));
                     
-                    // Mostrar debug
-                    showDebugInfo(rawProducts, allProducts);
+                    console.log('Productos procesados:', allProducts);
+                    
+                    filteredProducts = [...allProducts];
+                    
+                    displayStats();
+                    displayDebug();
+                    displayResults();
+                    
+                    statsDiv.style.display = 'grid';
                     debugDiv.style.display = 'block';
-                    
-                    displayStats(allProducts);
-                    displayResults(allProducts);
-                    statsDiv.style.display = 'flex';
                 } else {
                     resultsDiv.innerHTML = `
                         <div class="no-results">
                             <h2>😕 No encontramos resultados</h2>
                             <p>Intenta con otro término de búsqueda</p>
-                            <p style="margin-top: 10px; color: #999;">Sugerencias: generador, motobomba, hidrolavadora, soldadora</p>
                         </div>
                     `;
                 }
@@ -459,234 +469,205 @@
                 loadingDiv.style.display = 'none';
                 searchBtn.disabled = false;
                 errorDiv.style.display = 'block';
-                errorDiv.textContent = '❌ Error al buscar productos. Por favor intenta nuevamente.';
-                console.error('Error:', error);
+                errorDiv.textContent = `❌ Error: ${error.message}`;
+                console.error('Error completo:', error);
             }
         }
 
-        function processProducts(products) {
-            // Procesar cada producto individualmente sin agrupar
-            return products.map(product => {
-                const isNexmaq = isNexmaqStore(product.store, product.url);
-                
-                return {
-                    name: product.name,
-                    price: product.price,
-                    store: product.store,
-                    url: product.url,
-                    isNexmaq: isNexmaq
-                };
-            });
+        function detectNexmaq(product) {
+            const store = product.store.toLowerCase().trim();
+            const url = product.url.toLowerCase();
+            
+            // Múltiples formas de detectar NexMaq
+            return store.includes('nexmaq') || 
+                   store.includes('nex maq') ||
+                   store.includes('nex-maq') ||
+                   store === 'nexmaq' ||
+                   url.includes('nexmaq.com') ||
+                   url.includes('nexmaq.cl');
         }
 
-        function isNexmaqStore(store, url) {
-            const storeLower = store.toLowerCase();
-            const urlLower = url.toLowerCase();
-            
-            return storeLower.includes('nexmaq') || 
-                   storeLower.includes('nex maq') ||
-                   urlLower.includes('nexmaq.com');
-        }
-
-        function showDebugInfo(raw, processed) {
-            const debugContent = document.getElementById('debugContent');
-            
-            const storesFound = [...new Set(raw.map(p => p.store))];
-            const nexmaqCount = processed.filter(p => p.isNexmaq).length;
-            const competitorsCount = processed.filter(p => !p.isNexmaq).length;
-            
-            debugContent.innerHTML = `
-                <div style="margin-bottom: 15px;">
-                    <strong>📊 Resumen de búsqueda:</strong><br>
-                    Total productos encontrados: ${raw.length}<br>
-                    Productos NexMaq: ${nexmaqCount}<br>
-                    Productos Competencia: ${competitorsCount}
-                </div>
-                
-                <div style="margin-bottom: 15px;">
-                    <strong>🏪 Tiendas detectadas (${storesFound.length}):</strong><br>
-                    ${storesFound.map(s => `- ${s}`).join('<br>')}
-                </div>
-                
-                <div>
-                    <strong>📦 Primeros 5 productos (ejemplo):</strong><br>
-                    ${raw.slice(0, 5).map(p => `
-                        <div style="margin: 10px 0; padding: 10px; background: white; border-radius: 5px;">
-                            <strong>${p.name}</strong><br>
-                            Tienda: ${p.store}<br>
-                            Precio: $${formatPrice(p.price)}<br>
-                            URL: ${p.url.substring(0, 50)}...
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        function displayStats(products) {
+        function displayStats() {
             const statsDiv = document.getElementById('stats');
             
-            const nexmaqProducts = products.filter(p => p.isNexmaq);
-            const competitorProducts = products.filter(p => !p.isNexmaq);
-            
-            const nexmaqPrices = nexmaqProducts.map(p => p.price).filter(p => p > 0);
-            const competitorPrices = competitorProducts.map(p => p.price).filter(p => p > 0);
-            
-            const avgNexmaq = nexmaqPrices.length > 0 ? 
-                Math.round(nexmaqPrices.reduce((a, b) => a + b, 0) / nexmaqPrices.length) : 0;
-            const avgCompetitors = competitorPrices.length > 0 ?
-                Math.round(competitorPrices.reduce((a, b) => a + b, 0) / competitorPrices.length) : 0;
+            const nexmaqCount = allProducts.filter(p => p.isNexmaq).length;
+            const vielcoCount = allProducts.filter(p => p.storeLower.includes('vielco')).length;
+            const rembrakCount = allProducts.filter(p => p.storeLower.includes('rembrak')).length;
+            const cgcCount = allProducts.filter(p => p.storeLower.includes('cgc')).length;
+            const otherCount = allProducts.length - nexmaqCount - vielcoCount - rembrakCount - cgcCount;
             
             statsDiv.innerHTML = `
                 <div class="stat-item">
-                    <div class="stat-value">${products.length}</div>
-                    <div class="stat-label">Total Productos</div>
+                    <div class="stat-value">${allProducts.length}</div>
+                    <div class="stat-label">Total encontrados</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" style="color: #667eea;">${nexmaqProducts.length}</div>
-                    <div class="stat-label">Productos NexMaq</div>
+                    <div class="stat-value" style="color: #667eea;">${nexmaqCount}</div>
+                    <div class="stat-label">NexMaq</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" style="color: #10b981;">${competitorProducts.length}</div>
-                    <div class="stat-label">Productos Competencia</div>
+                    <div class="stat-value" style="color: #10b981;">${vielcoCount}</div>
+                    <div class="stat-label">Vielco</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" style="color: #667eea;">$${formatPrice(avgNexmaq)}</div>
-                    <div class="stat-label">Precio Promedio NexMaq</div>
+                    <div class="stat-value" style="color: #f59e0b;">${rembrakCount}</div>
+                    <div class="stat-label">Rembrak</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" style="color: #10b981;">$${formatPrice(avgCompetitors)}</div>
-                    <div class="stat-label">Precio Promedio Competencia</div>
+                    <div class="stat-value" style="color: #ef4444;">${cgcCount}</div>
+                    <div class="stat-label">CGC</div>
                 </div>
+                ${otherCount > 0 ? `
+                <div class="stat-item">
+                    <div class="stat-value" style="color: #6b7280;">${otherCount}</div>
+                    <div class="stat-label">Otras tiendas</div>
+                </div>
+                ` : ''}
             `;
         }
 
-        function displayResults(products) {
+        function displayDebug() {
+            const debugContent = document.getElementById('debugContent');
+            
+            const stores = {};
+            allProducts.forEach(p => {
+                if (!stores[p.store]) {
+                    stores[p.store] = {
+                        count: 0,
+                        isNexmaq: p.isNexmaq,
+                        example: p.url
+                    };
+                }
+                stores[p.store].count++;
+            });
+            
+            const storesArray = Object.entries(stores).sort((a, b) => b[1].count - a[1].count);
+            
+            debugContent.innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <strong style="font-size: 16px;">📊 Resumen:</strong>
+                    <div style="margin-top: 10px;">
+                        Total de productos: <strong>${allProducts.length}</strong><br>
+                        Productos de NexMaq detectados: <strong style="color: #667eea;">${allProducts.filter(p => p.isNexmaq).length}</strong><br>
+                        Tiendas únicas encontradas: <strong>${storesArray.length}</strong>
+                    </div>
+                </div>
+
+                <strong style="font-size: 16px;">🏪 Tiendas detectadas:</strong>
+                <table class="debug-table">
+                    <thead>
+                        <tr>
+                            <th>Tienda</th>
+                            <th>Productos</th>
+                            <th>Tipo</th>
+                            <th>URL ejemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${storesArray.map(([store, data]) => `
+                            <tr>
+                                <td><strong>${store}</strong></td>
+                                <td>${data.count}</td>
+                                <td>
+                                    <span class="store-badge ${data.isNexmaq ? 'nexmaq' : 'competitor'}">
+                                        ${data.isNexmaq ? 'NEXMAQ' : 'COMPETENCIA'}
+                                    </span>
+                                </td>
+                                <td style="font-size: 11px; color: #6b7280; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    ${data.example}
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function displayResults() {
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = '';
             
-            if (products.length === 0) {
+            if (filteredProducts.length === 0) {
                 resultsDiv.innerHTML = `
                     <div class="no-results">
-                        <h2>😕 No hay productos para mostrar</h2>
-                        <p>Intenta ajustar los filtros</p>
+                        <h2>😕 No hay productos con ese filtro</h2>
+                        <p>Intenta cambiar el filtro o hacer una nueva búsqueda</p>
                     </div>
                 `;
                 return;
             }
 
-            // Agrupar productos similares para mejor visualización
-            const grouped = groupSimilarProducts(products);
-            
-            grouped.forEach(group => {
+            filteredProducts.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 
-                const bestPrice = Math.min(...group.items.map(p => p.price));
-                
-                const pricesHtml = group.items.map(item => {
-                    const isBest = item.price === bestPrice;
-                    const classes = ['price-item'];
-                    if (item.isNexmaq) classes.push('nexmaq');
-                    if (isBest) classes.push('best-price');
-                    
-                    return `
-                        <div class="${classes.join(' ')}">
-                            <div class="store-label">
-                                ${item.store}
-                                ${isBest ? '<span class="best-badge">MEJOR PRECIO</span>' : ''}
-                            </div>
-                            <div class="price-value">$${formatPrice(item.price)}</div>
-                            <a href="${item.url}" target="_blank" class="price-link">
-                                Ver en tienda →
-                            </a>
-                        </div>
-                    `;
-                }).join('');
+                const storeClass = product.isNexmaq ? 'nexmaq' : 'competitor';
                 
                 card.innerHTML = `
-                    <div class="product-header">
-                        <div class="product-title">${group.name}</div>
-                        <div class="product-store">${group.items.length} ${group.items.length === 1 ? 'tienda' : 'tiendas'}</div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="store-info">
+                        <div class="store-name ${storeClass}">${product.store}</div>
+                        <span class="store-badge ${storeClass}">
+                            ${product.isNexmaq ? '🏢 NEXMAQ' : '🏪 COMPETENCIA'}
+                        </span>
                     </div>
-                    <div class="price-section">
-                        ${pricesHtml}
-                    </div>
+                    <div class="price">$${formatPrice(product.price)}</div>
+                    <a href="${product.url}" target="_blank" class="product-link">
+                        Ver en tienda →
+                    </a>
                 `;
                 
                 resultsDiv.appendChild(card);
             });
         }
 
-        function groupSimilarProducts(products) {
-            // Agrupar productos con nombres similares
-            const groups = new Map();
+        function applyFilters() {
+            const filter = document.getElementById('filterStore').value;
             
-            products.forEach(product => {
-                const key = normalizeProductName(product.name);
-                
-                if (!groups.has(key)) {
-                    groups.set(key, {
-                        name: product.name,
-                        items: []
-                    });
-                }
-                
-                groups.get(key).items.push(product);
-            });
+            console.log('Aplicando filtro:', filter);
             
-            return Array.from(groups.values());
-        }
-
-        function normalizeProductName(name) {
-            // Normalizar nombre para agrupar productos similares
-            return name.toLowerCase()
-                .replace(/[áàäâ]/g, 'a')
-                .replace(/[éèëê]/g, 'e')
-                .replace(/[íìïî]/g, 'i')
-                .replace(/[óòöô]/g, 'o')
-                .replace(/[úùüû]/g, 'u')
-                .replace(/\s+/g, ' ')
-                .trim()
-                .substring(0, 50); // Usar los primeros 50 caracteres como clave
+            switch(filter) {
+                case 'nexmaq':
+                    filteredProducts = allProducts.filter(p => p.isNexmaq);
+                    break;
+                case 'vielco':
+                    filteredProducts = allProducts.filter(p => p.storeLower.includes('vielco'));
+                    break;
+                case 'rembrak':
+                    filteredProducts = allProducts.filter(p => p.storeLower.includes('rembrak'));
+                    break;
+                case 'cgc':
+                    filteredProducts = allProducts.filter(p => p.storeLower.includes('cgc'));
+                    break;
+                default:
+                    filteredProducts = [...allProducts];
+            }
+            
+            console.log('Productos filtrados:', filteredProducts.length);
+            applySorting();
         }
 
         function applySorting() {
             const sortBy = document.getElementById('sortBy').value;
-            let sorted = [...allProducts];
+            
+            console.log('Aplicando ordenamiento:', sortBy);
             
             switch(sortBy) {
-                case 'name':
-                    sorted.sort((a, b) => a.name.localeCompare(b.name));
-                    break;
                 case 'price-low':
-                    sorted.sort((a, b) => a.price - b.price);
+                    filteredProducts.sort((a, b) => a.price - b.price);
                     break;
                 case 'price-high':
-                    sorted.sort((a, b) => b.price - a.price);
+                    filteredProducts.sort((a, b) => b.price - a.price);
                     break;
-            }
-            
-            displayResults(sorted);
-        }
-
-        function applyFilters() {
-            const filter = document.getElementById('filterStore').value;
-            let filtered = [...allProducts];
-            
-            switch(filter) {
-                case 'nexmaq':
-                    filtered = filtered.filter(p => p.isNexmaq);
+                case 'name':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
                     break;
-                case 'competitors':
-                    filtered = filtered.filter(p => !p.isNexmaq);
-                    break;
-                case 'all':
                 default:
-                    // No filtrar
+                    // Mantener orden original
                     break;
             }
             
-            displayResults(filtered);
+            displayResults();
         }
 
         function formatPrice(price) {
@@ -694,7 +675,6 @@
             return Math.round(price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
 
-        // Auto-focus en el input al cargar
         document.getElementById('searchInput').focus();
     </script>
 </body>
