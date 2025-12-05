@@ -399,7 +399,23 @@
             text-align: center;
         }
 
-        @media (max-width: 768px) {
+        .debug-info {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #374151;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .debug-info summary {
+            cursor: pointer;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
             .comparison-header {
                 grid-template-columns: 1fr;
             }
@@ -460,6 +476,12 @@
         </div>
 
         <div id="stats" class="stats" style="display: none;"></div>
+        <div id="debug" class="debug-info" style="display: none;">
+            <details>
+                <summary>🔍 Ver información de debug</summary>
+                <div id="debugContent"></div>
+            </details>
+        </div>
         
         <div id="loading" class="loading" style="display: none;">
             <div class="spinner"></div>
@@ -506,7 +528,9 @@
                 searchBtn.disabled = false;
 
                 if (data.results && data.results.length > 0) {
+                    console.log('Datos recibidos:', data.results);
                     allProducts = groupProductsByModel(data.results);
+                    console.log('Productos agrupados:', allProducts);
                     displayStats(allProducts);
                     displayResults(allProducts);
                     statsDiv.style.display = 'flex';
@@ -531,6 +555,9 @@
         function groupProductsByModel(products) {
             const groups = new Map();
             
+            // Debug: mostrar todas las tiendas encontradas
+            console.log('Tiendas encontradas:', [...new Set(products.map(p => p.store))]);
+            
             products.forEach(product => {
                 const key = extractProductKey(product.name);
                 
@@ -546,8 +573,16 @@
             });
             
             const result = Array.from(groups.values()).map(group => {
-                const nexmaqProduct = group.products.find(p => p.store.toLowerCase() === 'nexmaq');
-                const competitors = group.products.filter(p => p.store.toLowerCase() !== 'nexmaq');
+                // Buscar Nexmaq de forma más flexible
+                const nexmaqProduct = group.products.find(p => 
+                    p.store.toLowerCase().includes('nexmaq') || 
+                    p.store.toLowerCase().includes('nex maq') ||
+                    p.url.includes('nexmaq.com')
+                );
+                const competitors = group.products.filter(p => 
+                    !p.store.toLowerCase().includes('nexmaq') && 
+                    !p.url.includes('nexmaq.com')
+                );
                 
                 const allPrices = group.products.map(p => p.price).filter(p => p > 0);
                 const bestPrice = allPrices.length > 0 ? Math.min(...allPrices) : null;
