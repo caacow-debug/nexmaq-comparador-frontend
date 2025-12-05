@@ -139,15 +139,30 @@
             border-radius: 10px;
             margin-bottom: 20px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 3px solid #667eea;
         }
 
         .debug-section summary {
             cursor: pointer;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 18px;
             color: #667eea;
-            padding: 10px;
+            padding: 15px;
             user-select: none;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .debug-section summary:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+        }
+        
+        .debug-section summary::before {
+            content: '🔍';
+            font-size: 24px;
         }
 
         .debug-content {
@@ -681,27 +696,88 @@
                 if (!storeDetection[p.store]) {
                     storeDetection[p.store] = {
                         detected: store,
-                        count: 0
+                        count: 0,
+                        examples: []
                     };
                 }
                 storeDetection[p.store].count++;
+                if (storeDetection[p.store].examples.length < 2) {
+                    storeDetection[p.store].examples.push({
+                        name: p.name.substring(0, 60),
+                        url: p.url,
+                        price: p.price
+                    });
+                }
             });
             
+            const nexmaqProducts = rawProducts.filter(p => detectStore(p) === 'nexmaq');
+            
             debugContent.innerHTML = `
-                <div style="margin-bottom: 15px;">
-                    <strong>📊 Resumen:</strong><br>
-                    Productos totales: ${rawProducts.length}<br>
-                    Grupos creados: ${groupedProducts.length}
+                <div style="margin-bottom: 20px; padding: 15px; background: ${nexmaqProducts.length > 0 ? '#dcfce7' : '#fee2e2'}; border-radius: 8px;">
+                    <strong style="font-size: 18px;">
+                        ${nexmaqProducts.length > 0 ? '✅ NEXMAQ DETECTADO' : '❌ NEXMAQ NO ENCONTRADO'}
+                    </strong><br>
+                    <div style="margin-top: 10px; font-size: 14px;">
+                        ${nexmaqProducts.length > 0 
+                            ? `Se encontraron <strong>${nexmaqProducts.length} productos de NexMaq</strong>` 
+                            : `<strong>No se encontraron productos de NexMaq</strong> en la respuesta del API`
+                        }
+                    </div>
                 </div>
                 
                 <div style="margin-bottom: 15px;">
-                    <strong>🏪 Detección de tiendas:</strong><br>
-                    ${Object.entries(storeDetection).map(([original, data]) => `
-                        <div style="padding: 5px; margin: 3px 0;">
-                            "${original}" → <strong>${data.detected.toUpperCase()}</strong> (${data.count} productos)
-                        </div>
-                    `).join('')}
+                    <strong>📊 Resumen General:</strong><br>
+                    Productos totales recibidos del API: <strong>${rawProducts.length}</strong><br>
+                    Grupos creados: <strong>${groupedProducts.length}</strong><br>
+                    Tiendas únicas: <strong>${Object.keys(storeDetection).length}</strong>
                 </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <strong>🏪 Detección de tiendas:</strong><br>
+                    <div style="margin-top: 10px;">
+                        ${Object.entries(storeDetection)
+                            .sort((a, b) => b[1].count - a[1].count)
+                            .map(([original, data]) => `
+                            <div style="padding: 10px; margin: 8px 0; background: white; border-radius: 6px; border-left: 4px solid ${data.detected === 'nexmaq' ? '#667eea' : '#10b981'};">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                    <span style="font-weight: 700; font-size: 14px;">"${original}"</span>
+                                    <span style="background: ${data.detected === 'nexmaq' ? '#667eea' : '#10b981'}; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
+                                        ${data.detected.toUpperCase()}
+                                    </span>
+                                </div>
+                                <div style="font-size: 12px; color: #666;">
+                                    ${data.count} producto${data.count > 1 ? 's' : ''} encontrado${data.count > 1 ? 's' : ''}
+                                </div>
+                                <details style="margin-top: 8px;">
+                                    <summary style="cursor: pointer; font-size: 11px; color: #667eea; font-weight: 600;">Ver ejemplos</summary>
+                                    <div style="margin-top: 5px; padding: 8px; background: #f9fafb; border-radius: 4px; font-size: 11px;">
+                                        ${data.examples.map(ex => `
+                                            <div style="margin: 5px 0; padding: 5px 0; border-bottom: 1px solid #e5e7eb;">
+                                                <strong>${ex.name}...</strong><br>
+                                                Precio: ${formatPrice(ex.price)}<br>
+                                                <span style="color: #6b7280; word-break: break-all;">${ex.url}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </details>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                ${nexmaqProducts.length === 0 ? `
+                    <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; border: 2px solid #ffc107;">
+                        <strong>⚠️ Posibles razones por las que NexMaq no aparece:</strong><br>
+                        <ol style="margin: 10px 0 0 20px; line-height: 1.8;">
+                            <li>El API no está devolviendo productos de NexMaq</li>
+                            <li>Los productos de NexMaq usan un nombre diferente en la respuesta</li>
+                            <li>La URL del API podría estar apuntando solo a competidores</li>
+                        </ol>
+                        <div style="margin-top: 10px; padding: 10px; background: white; border-radius: 6px; font-size: 12px;">
+                            <strong>💡 Recomendación:</strong> Verifica la configuración del backend o los scrapers para asegurarte que estén incluyendo NexMaq en las búsquedas.
+                        </div>
+                    </div>
+                ` : ''}
             `;
         }
 
