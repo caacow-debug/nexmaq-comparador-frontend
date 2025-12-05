@@ -170,47 +170,100 @@
             gap: 25px;
         }
 
-        .product-comparison {
+        .product-group {
             background: white;
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
-        .product-header {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .product-image {
-            width: 150px;
-            height: 150px;
-            object-fit: contain;
-            border-radius: 10px;
-            background: #f5f5f5;
-        }
-
-        .product-info {
-            flex: 1;
-        }
-
-        .product-name {
-            font-size: 20px;
+        .product-title {
+            font-size: 22px;
             font-weight: 700;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .price-comparison-grid {
+        .product-specs {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .comparison-header {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 10px;
+        }
+
+        .nexmaq-reference {
+            display: flex;
+            align-items: center;
             gap: 15px;
         }
 
-        .store-card {
+        .nexmaq-logo {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .nexmaq-price-big {
+            font-size: 32px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .comparison-summary {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .summary-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .summary-badge.cheaper {
+            background: #10b981;
+            color: white;
+        }
+
+        .summary-badge.expensive {
+            background: #ef4444;
+            color: white;
+        }
+
+        .summary-badge.competitive {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .competitors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .competitor-card {
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             padding: 20px;
@@ -218,86 +271,86 @@
             transition: all 0.3s;
         }
 
-        .store-card:hover {
+        .competitor-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .store-card.nexmaq {
-            border-color: #667eea;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-        }
-
-        .store-card.best-price {
+        .competitor-card.cheaper {
             border-color: #10b981;
             background: rgba(16, 185, 129, 0.05);
         }
 
-        .store-card.best-price::before {
-            content: "🏆 MEJOR PRECIO";
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #10b981;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
+        .competitor-card.expensive {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .store-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .store-name {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #333;
-            margin-bottom: 10px;
             text-transform: uppercase;
         }
 
-        .store-card.nexmaq .store-name {
-            color: #667eea;
+        .comparison-icon {
+            font-size: 24px;
         }
 
         .store-price {
             font-size: 28px;
             font-weight: 700;
             color: #667eea;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        .store-card.best-price .store-price {
-            color: #10b981;
+        .price-vs-nexmaq {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
         }
 
-        .price-difference {
+        .price-diff {
+            padding: 8px 12px;
+            border-radius: 8px;
             font-size: 14px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            display: inline-block;
             font-weight: 600;
-            margin-bottom: 10px;
+            text-align: center;
         }
 
-        .price-difference.higher {
-            background: #fee;
-            color: #dc2626;
+        .price-diff.lower {
+            background: #dcfce7;
+            color: #166534;
         }
 
-        .price-difference.lower {
-            background: #efe;
-            color: #10b981;
+        .price-diff.higher {
+            background: #fee2e2;
+            color: #991b1b;
         }
 
-        .price-difference.equal {
-            background: #f0f0f0;
+        .price-diff.equal {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .percentage-diff {
+            font-size: 13px;
             color: #666;
+            text-align: center;
         }
 
         .store-link {
             display: block;
             padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
             color: white;
             text-align: center;
             text-decoration: none;
@@ -310,12 +363,23 @@
             opacity: 0.9;
         }
 
-        .store-card.nexmaq .store-link {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .competitor-card.cheaper .store-link {
+            background: #10b981;
         }
 
-        .store-card.best-price .store-link {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        .no-nexmaq {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #92400e;
+            font-weight: 600;
+        }
+
+        .only-competitors {
+            opacity: 0.9;
         }
 
         .no-results {
@@ -335,28 +399,16 @@
             text-align: center;
         }
 
-        .savings-badge {
-            background: #10b981;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 700;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
         @media (max-width: 768px) {
-            .product-header {
-                flex-direction: column;
+            .comparison-header {
+                grid-template-columns: 1fr;
             }
 
-            .product-image {
-                width: 100%;
-                height: 200px;
+            .comparison-summary {
+                align-items: flex-start;
             }
 
-            .price-comparison-grid {
+            .competitors-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -378,7 +430,7 @@
                 <input 
                     type="text" 
                     id="searchInput" 
-                    placeholder="Ej: generador diesel 5kva, motobomba, hidrolavadora..." 
+                    placeholder="Ej: generador, motobomba, hidrolavadora, soldadora..." 
                     onkeypress="if(event.key === 'Enter') searchProducts()"
                 >
                 <button onclick="searchProducts()" id="searchBtn">🔍 Comparar Precios</button>
@@ -388,17 +440,18 @@
                 <div class="filter-group">
                     <label>Ordenar por:</label>
                     <select id="sortBy" onchange="applySorting()">
-                        <option value="best-price">Mejor Precio</option>
-                        <option value="nexmaq-price">Precio NexMaq</option>
                         <option value="name">Nombre A-Z</option>
-                        <option value="savings">Mayor Ahorro</option>
+                        <option value="best-price">Mejor Precio General</option>
+                        <option value="nexmaq-price">Precio NexMaq</option>
+                        <option value="biggest-savings">Mayor Ahorro vs NexMaq</option>
                     </select>
                 </div>
                 
                 <div class="filter-group">
-                    <label>Mostrar solo:</label>
+                    <label>Filtrar:</label>
                     <select id="filterStore" onchange="applyFilters()">
-                        <option value="all">Todas las tiendas</option>
+                        <option value="all">Todos los productos</option>
+                        <option value="has-nexmaq">Solo con NexMaq</option>
                         <option value="nexmaq-cheaper">NexMaq más barato</option>
                         <option value="competitors-cheaper">Competencia más barata</option>
                     </select>
@@ -453,7 +506,7 @@
                 searchBtn.disabled = false;
 
                 if (data.results && data.results.length > 0) {
-                    allProducts = groupAndCompareProducts(data.results);
+                    allProducts = groupProductsByModel(data.results);
                     displayStats(allProducts);
                     displayResults(allProducts);
                     statsDiv.style.display = 'flex';
@@ -475,43 +528,58 @@
             }
         }
 
-        function groupAndCompareProducts(products) {
+        function groupProductsByModel(products) {
             const groups = new Map();
             
             products.forEach(product => {
-                const normalizedName = normalizeProductName(product.name);
-                const key = extractProductKey(normalizedName);
+                const key = extractProductKey(product.name);
                 
-                if (!groups.has(key)) {
-                    groups.set(key, {
-                        name: product.name,
-                        variants: []
+                if (!groups.has(key.normalized)) {
+                    groups.set(key.normalized, {
+                        displayName: key.display,
+                        specs: key.specs,
+                        products: []
                     });
                 }
                 
-                groups.get(key).variants.push(product);
+                groups.get(key.normalized).products.push(product);
             });
             
             const result = Array.from(groups.values()).map(group => {
-                const nexmaqProduct = group.variants.find(v => v.store.toLowerCase() === 'nexmaq');
-                const competitorProducts = group.variants.filter(v => v.store.toLowerCase() !== 'nexmaq');
+                const nexmaqProduct = group.products.find(p => p.store.toLowerCase() === 'nexmaq');
+                const competitors = group.products.filter(p => p.store.toLowerCase() !== 'nexmaq');
                 
-                const allPrices = group.variants.map(v => v.price).filter(p => p > 0);
-                const bestPrice = Math.min(...allPrices);
-                const bestPriceStore = group.variants.find(v => v.price === bestPrice);
+                const allPrices = group.products.map(p => p.price).filter(p => p > 0);
+                const bestPrice = allPrices.length > 0 ? Math.min(...allPrices) : null;
                 
-                const nexmaqPrice = nexmaqProduct ? nexmaqProduct.price : null;
-                const savings = nexmaqPrice && nexmaqPrice > bestPrice ? nexmaqPrice - bestPrice : 0;
-                const nexmaqIsCheaper = nexmaqPrice === bestPrice;
+                let competitorAnalysis = [];
+                if (nexmaqProduct) {
+                    competitors.forEach(comp => {
+                        const diff = comp.price - nexmaqProduct.price;
+                        const percentage = ((diff / nexmaqProduct.price) * 100).toFixed(1);
+                        competitorAnalysis.push({
+                            ...comp,
+                            diff,
+                            percentage,
+                            isCheaper: diff < 0,
+                            isExpensive: diff > 0
+                        });
+                    });
+                }
+                
+                const nexmaqIsBest = nexmaqProduct && nexmaqProduct.price === bestPrice;
+                const nexmaqIsCompetitive = nexmaqProduct && Math.abs(nexmaqProduct.price - bestPrice) / bestPrice < 0.1;
                 
                 return {
-                    ...group,
+                    displayName: group.displayName,
+                    specs: group.specs,
                     nexmaqProduct,
-                    competitorProducts,
+                    competitors: competitorAnalysis,
+                    allProducts: group.products,
                     bestPrice,
-                    bestPriceStore,
-                    nexmaqIsCheaper,
-                    savings
+                    nexmaqIsBest,
+                    nexmaqIsCompetitive,
+                    hasNexmaq: !!nexmaqProduct
                 };
             });
             
@@ -519,49 +587,69 @@
         }
 
         function extractProductKey(name) {
-            // Extraer modelo/características clave para agrupar productos similares
-            const match = name.match(/(\d+\s*k?va?|\d+\s*kw|\d+\s*hp|go\d+|gs\d+|gss\d+)/i);
-            if (match) {
-                return match[0].toLowerCase().replace(/\s/g, '');
-            }
-            return name.substring(0, 20);
-        }
-
-        function normalizeProductName(name) {
-            return name.toLowerCase()
+            const normalized = name.toLowerCase()
                 .replace(/[áàäâ]/g, 'a')
                 .replace(/[éèëê]/g, 'e')
                 .replace(/[íìïî]/g, 'i')
                 .replace(/[óòöô]/g, 'o')
-                .replace(/[úùüû]/g, 'u')
-                .replace(/\s+/g, ' ')
-                .trim();
+                .replace(/[úùüû]/g, 'u');
+            
+            // Extraer modelo principal
+            const modelMatch = normalized.match(/(?:kolvok|hyundai|toyama|krafter|power pro)\s+([a-z0-9]+)/i);
+            const model = modelMatch ? modelMatch[0] : '';
+            
+            // Extraer potencia
+            const powerMatch = normalized.match(/(\d+(?:\.\d+)?)\s*k?v?a?/i);
+            const power = powerMatch ? powerMatch[1] + 'kva' : '';
+            
+            // Extraer tipo
+            let type = '';
+            if (normalized.includes('diesel')) type = 'diesel';
+            else if (normalized.includes('gasolina')) type = 'gasolina';
+            else if (normalized.includes('inverter')) type = 'inverter';
+            
+            // Extraer fase
+            let phase = '';
+            if (normalized.includes('trifasico') || normalized.includes('trifásico')) phase = 'trifasico';
+            else if (normalized.includes('monofasico') || normalized.includes('monofásico')) phase = 'monofasico';
+            
+            const key = [model, power, type, phase].filter(x => x).join('-');
+            
+            return {
+                normalized: key || normalized.substring(0, 30),
+                display: name,
+                specs: [power, type, phase].filter(x => x).join(' · ').toUpperCase()
+            };
         }
 
         function displayStats(products) {
             const statsDiv = document.getElementById('stats');
             
-            const totalProducts = products.length;
-            const nexmaqCheaperCount = products.filter(p => p.nexmaqIsCheaper).length;
-            const totalSavings = products.reduce((sum, p) => sum + (p.nexmaqIsCheaper ? 0 : p.savings), 0);
-            const avgSavings = totalSavings / products.filter(p => !p.nexmaqIsCheaper).length || 0;
+            const withNexmaq = products.filter(p => p.hasNexmaq);
+            const nexmaqBest = withNexmaq.filter(p => p.nexmaqIsBest).length;
+            const nexmaqCompetitive = withNexmaq.filter(p => p.nexmaqIsCompetitive && !p.nexmaqIsBest).length;
+            const competitorsBetter = withNexmaq.filter(p => !p.nexmaqIsBest && !p.nexmaqIsCompetitive).length;
             
             statsDiv.innerHTML = `
                 <div class="stat-item">
-                    <div class="stat-value">${totalProducts}</div>
-                    <div class="stat-label">Productos encontrados</div>
+                    <div class="stat-value">${products.length}</div>
+                    <div class="stat-label">Modelos encontrados</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">${nexmaqCheaperCount}</div>
-                    <div class="stat-label">NexMaq tiene mejor precio</div>
+                    <div class="stat-value">${withNexmaq.length}</div>
+                    <div class="stat-label">Con precio en NexMaq</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">${totalProducts - nexmaqCheaperCount}</div>
+                    <div class="stat-value" style="color: #10b981;">${nexmaqBest}</div>
+                    <div class="stat-label">NexMaq mejor precio</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" style="color: #f59e0b;">${nexmaqCompetitive}</div>
+                    <div class="stat-label">NexMaq competitivo</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" style="color: #ef4444;">${competitorsBetter}</div>
                     <div class="stat-label">Competencia más barata</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">$${formatPrice(Math.round(avgSavings))}</div>
-                    <div class="stat-label">Ahorro promedio posible</div>
                 </div>
             `;
         }
@@ -572,56 +660,94 @@
             
             products.forEach(group => {
                 const card = document.createElement('div');
-                card.className = 'product-comparison';
+                card.className = 'product-group';
                 
-                const mainProduct = group.nexmaqProduct || group.variants[0];
+                let headerContent = '';
                 
-                const storesHtml = group.variants
-                    .sort((a, b) => a.price - b.price)
-                    .map(product => {
-                        const isNexmaq = product.store.toLowerCase() === 'nexmaq';
-                        const isBestPrice = product.price === group.bestPrice;
-                        const priceDiff = group.nexmaqProduct && !isNexmaq ? 
-                            product.price - group.nexmaqProduct.price : 0;
-                        
-                        let diffHtml = '';
-                        if (group.nexmaqProduct && !isNexmaq) {
-                            if (priceDiff > 0) {
-                                diffHtml = `<div class="price-difference higher">+$${formatPrice(priceDiff)} más caro</div>`;
-                            } else if (priceDiff < 0) {
-                                diffHtml = `<div class="price-difference lower">-$${formatPrice(Math.abs(priceDiff))} más barato</div>`;
-                            } else {
-                                diffHtml = `<div class="price-difference equal">Mismo precio</div>`;
-                            }
+                if (group.hasNexmaq) {
+                    let summaryBadge = '';
+                    if (group.nexmaqIsBest) {
+                        summaryBadge = '<div class="summary-badge cheaper">🏆 NEXMAQ MEJOR PRECIO</div>';
+                    } else if (group.nexmaqIsCompetitive) {
+                        summaryBadge = '<div class="summary-badge competitive">⚡ NEXMAQ COMPETITIVO</div>';
+                    } else {
+                        const cheaperCompetitor = group.competitors.find(c => c.isCheaper);
+                        if (cheaperCompetitor) {
+                            const savings = Math.abs(cheaperCompetitor.diff);
+                            summaryBadge = `<div class="summary-badge expensive">💰 Ahorra $${formatPrice(Math.round(savings))} en ${cheaperCompetitor.store}</div>`;
                         }
-                        
-                        return `
-                            <div class="store-card ${isNexmaq ? 'nexmaq' : ''} ${isBestPrice ? 'best-price' : ''}">
-                                <div class="store-name">${product.store}</div>
-                                <div class="store-price">$${formatPrice(product.price)}</div>
-                                ${diffHtml}
-                                <a href="${product.url}" target="_blank" class="store-link">Ver producto →</a>
+                    }
+                    
+                    headerContent = `
+                        <div class="comparison-header">
+                            <div class="nexmaq-reference">
+                                <div class="nexmaq-logo">NEXMAQ</div>
+                                <div>
+                                    <div class="nexmaq-price-big">$${formatPrice(group.nexmaqProduct.price)}</div>
+                                    <div style="font-size: 12px; color: #666; margin-top: 5px;">Precio de referencia</div>
+                                </div>
                             </div>
-                        `;
-                    }).join('');
-                
-                let savingsHtml = '';
-                if (group.savings > 0) {
-                    savingsHtml = `<div class="savings-badge">💰 Ahorra $${formatPrice(Math.round(group.savings))} comprando en ${group.bestPriceStore.store}</div>`;
+                            <div class="comparison-summary">
+                                ${summaryBadge}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    headerContent = `
+                        <div class="no-nexmaq">
+                            ⚠️ Este producto no está disponible en NexMaq
+                        </div>
+                    `;
                 }
                 
+                const competitorsHtml = group.hasNexmaq ? 
+                    group.competitors.map(comp => `
+                        <div class="competitor-card ${comp.isCheaper ? 'cheaper' : comp.isExpensive ? 'expensive' : ''}">
+                            <div class="store-header">
+                                <div class="store-name">${comp.store}</div>
+                                <div class="comparison-icon">${comp.isCheaper ? '✅' : comp.isExpensive ? '❌' : '➖'}</div>
+                            </div>
+                            <div class="store-price">$${formatPrice(comp.price)}</div>
+                            <div class="price-vs-nexmaq">
+                                <div class="price-diff ${comp.isCheaper ? 'lower' : comp.isExpensive ? 'higher' : 'equal'}">
+                                    ${comp.isCheaper ? '↓' : comp.isExpensive ? '↑' : '='} 
+                                    ${comp.isCheaper ? '-' : '+'}$${formatPrice(Math.abs(comp.diff))}
+                                </div>
+                                <div class="percentage-diff">
+                                    ${comp.isCheaper ? 'Más barato' : 'Más caro'} ${Math.abs(comp.percentage)}% vs NexMaq
+                                </div>
+                            </div>
+                            <a href="${comp.url}" target="_blank" class="store-link">
+                                ${comp.isCheaper ? 'Ver oferta' : 'Ver producto'} →
+                            </a>
+                        </div>
+                    `).join('') :
+                    group.allProducts.map(prod => `
+                        <div class="competitor-card only-competitors">
+                            <div class="store-header">
+                                <div class="store-name">${prod.store}</div>
+                            </div>
+                            <div class="store-price">$${formatPrice(prod.price)}</div>
+                            <a href="${prod.url}" target="_blank" class="store-link">Ver producto →</a>
+                        </div>
+                    `).join('');
+                
                 card.innerHTML = `
-                    <div class="product-header">
-                        ${mainProduct.image ? `<img src="${mainProduct.image}" alt="${group.name}" class="product-image" onerror="this.style.display='none'">` : ''}
-                        <div class="product-info">
-                            <div class="product-name">${group.name}</div>
-                            <p style="color: #666; margin-top: 10px;">Comparando en ${group.variants.length} ${group.variants.length === 1 ? 'tienda' : 'tiendas'}</p>
-                            ${savingsHtml}
+                    <div class="product-title">
+                        <div>
+                            <div>${group.displayName}</div>
+                            ${group.specs ? `<div class="product-specs">${group.specs}</div>` : ''}
                         </div>
                     </div>
-                    <div class="price-comparison-grid">
-                        ${storesHtml}
-                    </div>
+                    ${headerContent}
+                    ${competitorsHtml ? `
+                        <div style="margin-bottom: 10px; color: #666; font-weight: 600; font-size: 14px;">
+                            ${group.hasNexmaq ? 'COMPARACIÓN CON COMPETENCIA:' : 'DISPONIBLE EN:'}
+                        </div>
+                        <div class="competitors-grid">
+                            ${competitorsHtml}
+                        </div>
+                    ` : ''}
                 `;
                 
                 resultsDiv.appendChild(card);
@@ -630,12 +756,14 @@
 
         function applySorting() {
             const sortBy = document.getElementById('sortBy').value;
-            
             let sorted = [...allProducts];
             
             switch(sortBy) {
+                case 'name':
+                    sorted.sort((a, b) => a.displayName.localeCompare(b.displayName));
+                    break;
                 case 'best-price':
-                    sorted.sort((a, b) => a.bestPrice - b.bestPrice);
+                    sorted.sort((a, b) => (a.bestPrice || Infinity) - (b.bestPrice || Infinity));
                     break;
                 case 'nexmaq-price':
                     sorted.sort((a, b) => {
@@ -644,11 +772,14 @@
                         return priceA - priceB;
                     });
                     break;
-                case 'name':
-                    sorted.sort((a, b) => a.name.localeCompare(b.name));
-                    break;
-                case 'savings':
-                    sorted.sort((a, b) => b.savings - a.savings);
+                case 'biggest-savings':
+                    sorted.sort((a, b) => {
+                        const savingsA = a.hasNexmaq && !a.nexmaqIsBest ? 
+                            (a.nexmaqProduct.price - a.bestPrice) : 0;
+                        const savingsB = b.hasNexmaq && !b.nexmaqIsBest ? 
+                            (b.nexmaqProduct.price - b.bestPrice) : 0;
+                        return savingsB - savingsA;
+                    });
                     break;
             }
             
@@ -657,15 +788,17 @@
 
         function applyFilters() {
             const filter = document.getElementById('filterStore').value;
-            
             let filtered = [...allProducts];
             
             switch(filter) {
+                case 'has-nexmaq':
+                    filtered = filtered.filter(p => p.hasNexmaq);
+                    break;
                 case 'nexmaq-cheaper':
-                    filtered = filtered.filter(p => p.nexmaqIsCheaper);
+                    filtered = filtered.filter(p => p.nexmaqIsBest);
                     break;
                 case 'competitors-cheaper':
-                    filtered = filtered.filter(p => !p.nexmaqIsCheaper);
+                    filtered = filtered.filter(p => p.hasNexmaq && !p.nexmaqIsBest);
                     break;
             }
             
