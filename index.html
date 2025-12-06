@@ -35,6 +35,49 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
+        .alert-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .alert-box.error {
+            border-left: 5px solid #ef4444;
+        }
+
+        .alert-box.warning {
+            border-left: 5px solid #f59e0b;
+        }
+
+        .alert-box.info {
+            border-left: 5px solid #3b82f6;
+        }
+
+        .alert-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #374151;
+        }
+
+        .alert-content ul {
+            margin: 10px 0 10px 20px;
+        }
+
+        .alert-content li {
+            margin: 5px 0;
+        }
+
         .search-box {
             background: white;
             padding: 30px;
@@ -46,7 +89,7 @@
         .search-input-group {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         input[type="text"] {
@@ -81,6 +124,29 @@
         button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+        }
+
+        .search-suggestions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .suggestion-chip {
+            padding: 6px 12px;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggestion-chip:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
         }
 
         .loading {
@@ -133,47 +199,6 @@
             margin-top: 5px;
         }
 
-        .debug-section {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border: 3px solid #667eea;
-        }
-
-        .debug-section summary {
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 18px;
-            color: #667eea;
-            padding: 15px;
-            user-select: none;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .debug-section summary:hover {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
-        }
-        
-        .debug-section summary::before {
-            content: '🔍';
-            font-size: 24px;
-        }
-
-        .debug-content {
-            margin-top: 15px;
-            padding: 15px;
-            background: #f9fafb;
-            border-radius: 8px;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
         .results-grid {
             display: grid;
             gap: 25px;
@@ -214,12 +239,6 @@
             gap: 15px;
             margin-top: 20px;
         }
-        
-        @media (max-width: 1200px) {
-            .prices-comparison {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
 
         .price-card {
             border: 3px solid #e5e7eb;
@@ -234,8 +253,8 @@
         }
 
         .price-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .price-card.nexmaq {
@@ -275,7 +294,7 @@
             color: #667eea;
             font-size: 17px;
         }
-        
+
         .price-card.best-price .store-name {
             color: #10b981;
         }
@@ -298,7 +317,7 @@
             color: white;
             animation: pulse 2s ease-in-out infinite;
         }
-        
+
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -317,7 +336,7 @@
             font-size: 18px;
             font-weight: 600;
         }
-        
+
         .price-card.best-price .price-value {
             color: #10b981;
         }
@@ -377,11 +396,11 @@
             pointer-events: none;
             color: #6b7280;
         }
-        
+
         .price-card.best-price .product-link {
             background: #10b981;
         }
-        
+
         .price-card.best-price .product-link:hover {
             background: #059669;
         }
@@ -402,6 +421,12 @@
             margin-bottom: 20px;
             text-align: center;
             font-weight: 600;
+        }
+
+        @media (max-width: 1200px) {
+            .prices-comparison {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -426,30 +451,34 @@
             <p style="opacity: 0.95; font-size: 1.1em;">Compara precios entre NexMaq, Vielco, Rembrak y CGC</p>
         </div>
 
+        <div id="apiAlert" style="display: none;"></div>
+
         <div class="search-box">
             <div class="search-input-group">
                 <input 
                     type="text" 
                     id="searchInput" 
-                    placeholder="Busca: generador, motobomba, hidrolavadora, soldadora..." 
+                    placeholder="Busca productos: generador, motobomba, hidrolavadora..." 
                     onkeypress="if(event.key === 'Enter') searchProducts()"
                 >
-                <button onclick="searchProducts()" id="searchBtn">🔍 Buscar y Comparar</button>
+                <button onclick="searchProducts()" id="searchBtn">🔍 Buscar</button>
+            </div>
+            
+            <div class="search-suggestions">
+                <span style="font-size: 13px; color: #6b7280; font-weight: 600;">Búsquedas sugeridas:</span>
+                <div class="suggestion-chip" onclick="quickSearch('generador kolvok')">Generador Kolvok</div>
+                <div class="suggestion-chip" onclick="quickSearch('generador diesel')">Generador Diesel</div>
+                <div class="suggestion-chip" onclick="quickSearch('motobomba')">Motobomba</div>
+                <div class="suggestion-chip" onclick="quickSearch('hidrolavadora')">Hidrolavadora</div>
+                <div class="suggestion-chip" onclick="quickSearch('soldadora')">Soldadora</div>
             </div>
         </div>
 
         <div id="stats" class="stats" style="display: none;"></div>
         
-        <div id="debug" class="debug-section" style="display: none;">
-            <details>
-                <summary>🔍 Ver información técnica (debug)</summary>
-                <div id="debugContent" class="debug-content"></div>
-            </details>
-        </div>
-        
         <div id="loading" class="loading" style="display: none;">
             <div class="spinner"></div>
-            <p>Comparando precios en todas las tiendas...</p>
+            <p>Buscando en todas las tiendas...</p>
         </div>
         
         <div id="error" class="error" style="display: none;"></div>
@@ -459,6 +488,11 @@
     <script>
         const API_URL = 'https://nexmaq-comparador-production.up.railway.app';
         const STORES = ['nexmaq', 'vielco', 'rembrak', 'cgc'];
+
+        function quickSearch(query) {
+            document.getElementById('searchInput').value = query;
+            searchProducts();
+        }
 
         async function searchProducts() {
             const query = document.getElementById('searchInput').value.trim();
@@ -472,13 +506,13 @@
             const resultsDiv = document.getElementById('results');
             const errorDiv = document.getElementById('error');
             const statsDiv = document.getElementById('stats');
-            const debugDiv = document.getElementById('debug');
+            const alertDiv = document.getElementById('apiAlert');
             const searchBtn = document.getElementById('searchBtn');
 
             resultsDiv.innerHTML = '';
             errorDiv.style.display = 'none';
             statsDiv.style.display = 'none';
-            debugDiv.style.display = 'none';
+            alertDiv.style.display = 'none';
             loadingDiv.style.display = 'block';
             searchBtn.disabled = true;
 
@@ -490,29 +524,29 @@
                 }
 
                 const data = await response.json();
-                console.log('Datos recibidos:', data);
+                console.log('Respuesta del API:', data);
                 
                 loadingDiv.style.display = 'none';
                 searchBtn.disabled = false;
 
-                if (data.results && data.results.length > 0) {
-                    const groupedProducts = groupProductsByModel(data.results);
-                    console.log('Productos agrupados:', groupedProducts);
-                    
-                    displayStats(groupedProducts, data.results);
-                    displayDebug(data.results, groupedProducts);
-                    displayResults(groupedProducts);
-                    
-                    statsDiv.style.display = 'grid';
-                    debugDiv.style.display = 'block';
-                } else {
-                    resultsDiv.innerHTML = `
-                        <div class="no-results">
-                            <h2>😕 No encontramos resultados</h2>
-                            <p>Intenta con otro término de búsqueda</p>
-                        </div>
-                    `;
+                if (!data.results || data.results.length === 0) {
+                    showNoResultsMessage(query);
+                    return;
                 }
+
+                const processedProducts = processProducts(data.results);
+                const groupedProducts = groupProductsByModel(processedProducts);
+                
+                // Verificar si hay productos de NexMaq
+                const nexmaqCount = processedProducts.filter(p => p.isNexmaq).length;
+                if (nexmaqCount === 0) {
+                    showNexmaqAlert();
+                }
+                
+                displayStats(groupedProducts, processedProducts);
+                displayResults(groupedProducts);
+                
+                statsDiv.style.display = 'grid';
             } catch (error) {
                 loadingDiv.style.display = 'none';
                 searchBtn.disabled = false;
@@ -522,20 +556,40 @@
             }
         }
 
+        function processProducts(rawProducts) {
+            return rawProducts.map(product => {
+                const store = detectStore(product);
+                return {
+                    ...product,
+                    detectedStore: store,
+                    isNexmaq: store === 'nexmaq'
+                };
+            });
+        }
+
         function detectStore(product) {
             const store = product.store.toLowerCase().trim();
             const url = product.url.toLowerCase();
             
-            if (store.includes('nexmaq') || url.includes('nexmaq.com')) return 'nexmaq';
-            if (store.includes('vielco') || url.includes('vielco')) return 'vielco';
-            if (store.includes('rembrak') || url.includes('rembrak')) return 'rembrak';
-            if (store.includes('cgc') || url.includes('cgc')) return 'cgc';
+            // Detección mejorada para cada tienda
+            if (store.includes('nexmaq') || store.includes('nex maq') || store.includes('nex-maq') || url.includes('nexmaq.com') || url.includes('nexmaq.cl')) {
+                return 'nexmaq';
+            }
+            if (store.includes('vielco') || url.includes('vielco')) {
+                return 'vielco';
+            }
+            if (store.includes('rembrak') || url.includes('rembrak')) {
+                return 'rembrak';
+            }
+            if (store.includes('cgc') || url.includes('cgc')) {
+                return 'cgc';
+            }
             
-            return 'otro';
+            // Si no coincide con ninguna, usar el nombre original
+            return store;
         }
 
         function normalizeProductName(name) {
-            // Extraer información clave del producto
             const normalized = name.toLowerCase()
                 .replace(/[áàäâ]/g, 'a')
                 .replace(/[éèëê]/g, 'e')
@@ -545,34 +599,29 @@
                 .replace(/\s+/g, ' ')
                 .trim();
             
-            // Extraer marca y modelo
-            const brandMatch = normalized.match(/(kolvok|hyundai|toyama|krafter|power pro|powergen|honda|yamaha|bauker)/i);
+            // Extraer características clave
+            const brandMatch = normalized.match(/(kolvok|hyundai|toyama|krafter|power pro|powergen|honda|yamaha|bauker|anova)/i);
             const brand = brandMatch ? brandMatch[0] : '';
             
-            // Extraer modelo/número
-            const modelMatch = normalized.match(/([a-z]+\s*\d+[a-z]?\d*)/i);
+            const modelMatch = normalized.match(/([a-z]+\d+[a-z]?\d*)/i);
             const model = modelMatch ? modelMatch[0].replace(/\s+/g, '') : '';
             
-            // Extraer potencia
             const powerMatch = normalized.match(/(\d+(?:\.\d+)?)\s*k?v?a/i);
             const power = powerMatch ? powerMatch[1] : '';
             
-            // Extraer tipo de combustible
             let fuel = '';
             if (normalized.includes('diesel')) fuel = 'diesel';
             else if (normalized.includes('gasolina') || normalized.includes('bencina')) fuel = 'gasolina';
             else if (normalized.includes('gas')) fuel = 'gas';
             
-            // Extraer tipo
             let type = '';
             if (normalized.includes('inverter')) type = 'inverter';
-            else if (normalized.includes('convencional')) type = 'convencional';
             
-            // Extraer fase
             let phase = '';
             if (normalized.includes('trifasico') || normalized.includes('trifásico')) phase = '3f';
             else if (normalized.includes('monofasico') || normalized.includes('monofásico')) phase = '1f';
             
+            // Crear clave única combinando características
             const key = [brand, model, power, fuel, type, phase].filter(x => x).join('-');
             
             return {
@@ -591,7 +640,7 @@
             
             products.forEach(product => {
                 const normalized = normalizeProductName(product.name);
-                const store = detectStore(product);
+                const store = product.detectedStore;
                 
                 if (!groups.has(normalized.key)) {
                     groups.set(normalized.key, {
@@ -611,7 +660,7 @@
                 
                 const group = groups.get(normalized.key);
                 
-                // Solo guardar el primer producto de cada tienda (evitar duplicados)
+                // Guardar el producto más barato de cada tienda
                 if (!group.stores[store] || group.stores[store].price > product.price) {
                     group.stores[store] = {
                         name: product.name,
@@ -625,7 +674,59 @@
             return Array.from(groups.values());
         }
 
-        function displayStats(groupedProducts, rawProducts) {
+        function showNexmaqAlert() {
+            const alertDiv = document.getElementById('apiAlert');
+            alertDiv.style.display = 'block';
+            alertDiv.className = 'alert-box error';
+            alertDiv.innerHTML = `
+                <div class="alert-title">
+                    <span style="font-size: 24px;">⚠️</span>
+                    <span>No se encontraron productos de NexMaq</span>
+                </div>
+                <div class="alert-content">
+                    <p><strong>El sistema de scraping no está devolviendo productos de NexMaq.</strong></p>
+                    <p>Posibles causas:</p>
+                    <ul>
+                        <li>El scraper de NexMaq no está configurado o activo</li>
+                        <li>La estructura del sitio web de NexMaq cambió</li>
+                        <li>El API solo está configurado para competidores</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Recomendación:</strong> Contacta al equipo de desarrollo para verificar la configuración del backend y los scrapers.</p>
+                </div>
+            `;
+        }
+
+        function showNoResultsMessage(query) {
+            const resultsDiv = document.getElementById('results');
+            const alertDiv = document.getElementById('apiAlert');
+            
+            alertDiv.style.display = 'block';
+            alertDiv.className = 'alert-box warning';
+            alertDiv.innerHTML = `
+                <div class="alert-title">
+                    <span style="font-size: 24px;">💡</span>
+                    <span>No se encontraron resultados para "${query}"</span>
+                </div>
+                <div class="alert-content">
+                    <p><strong>Tips para mejorar tu búsqueda:</strong></p>
+                    <ul>
+                        <li>Usa términos más generales (ej: "generador" en lugar de "generador kolvok 5kva diesel")</li>
+                        <li>Busca por marca solamente (ej: "kolvok", "hyundai")</li>
+                        <li>Intenta con el tipo de producto (ej: "motobomba", "hidrolavadora")</li>
+                        <li>Verifica la ortografía de tu búsqueda</li>
+                    </ul>
+                </div>
+            `;
+            
+            resultsDiv.innerHTML = `
+                <div class="no-results">
+                    <h2>😕 No encontramos productos</h2>
+                    <p style="margin-top: 15px;">Intenta con las búsquedas sugeridas arriba</p>
+                </div>
+            `;
+        }
+
+        function displayStats(groupedProducts, processedProducts) {
             const statsDiv = document.getElementById('stats');
             
             const storeCount = {
@@ -635,10 +736,9 @@
                 cgc: 0
             };
             
-            rawProducts.forEach(p => {
-                const store = detectStore(p);
-                if (storeCount[store] !== undefined) {
-                    storeCount[store]++;
+            processedProducts.forEach(p => {
+                if (storeCount[p.detectedStore] !== undefined) {
+                    storeCount[p.detectedStore]++;
                 }
             });
             
@@ -687,100 +787,6 @@
             `;
         }
 
-        function displayDebug(rawProducts, groupedProducts) {
-            const debugContent = document.getElementById('debugContent');
-            
-            const storeDetection = {};
-            rawProducts.forEach(p => {
-                const store = detectStore(p);
-                if (!storeDetection[p.store]) {
-                    storeDetection[p.store] = {
-                        detected: store,
-                        count: 0,
-                        examples: []
-                    };
-                }
-                storeDetection[p.store].count++;
-                if (storeDetection[p.store].examples.length < 2) {
-                    storeDetection[p.store].examples.push({
-                        name: p.name.substring(0, 60),
-                        url: p.url,
-                        price: p.price
-                    });
-                }
-            });
-            
-            const nexmaqProducts = rawProducts.filter(p => detectStore(p) === 'nexmaq');
-            
-            debugContent.innerHTML = `
-                <div style="margin-bottom: 20px; padding: 15px; background: ${nexmaqProducts.length > 0 ? '#dcfce7' : '#fee2e2'}; border-radius: 8px;">
-                    <strong style="font-size: 18px;">
-                        ${nexmaqProducts.length > 0 ? '✅ NEXMAQ DETECTADO' : '❌ NEXMAQ NO ENCONTRADO'}
-                    </strong><br>
-                    <div style="margin-top: 10px; font-size: 14px;">
-                        ${nexmaqProducts.length > 0 
-                            ? `Se encontraron <strong>${nexmaqProducts.length} productos de NexMaq</strong>` 
-                            : `<strong>No se encontraron productos de NexMaq</strong> en la respuesta del API`
-                        }
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 15px;">
-                    <strong>📊 Resumen General:</strong><br>
-                    Productos totales recibidos del API: <strong>${rawProducts.length}</strong><br>
-                    Grupos creados: <strong>${groupedProducts.length}</strong><br>
-                    Tiendas únicas: <strong>${Object.keys(storeDetection).length}</strong>
-                </div>
-                
-                <div style="margin-bottom: 20px;">
-                    <strong>🏪 Detección de tiendas:</strong><br>
-                    <div style="margin-top: 10px;">
-                        ${Object.entries(storeDetection)
-                            .sort((a, b) => b[1].count - a[1].count)
-                            .map(([original, data]) => `
-                            <div style="padding: 10px; margin: 8px 0; background: white; border-radius: 6px; border-left: 4px solid ${data.detected === 'nexmaq' ? '#667eea' : '#10b981'};">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                                    <span style="font-weight: 700; font-size: 14px;">"${original}"</span>
-                                    <span style="background: ${data.detected === 'nexmaq' ? '#667eea' : '#10b981'}; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
-                                        ${data.detected.toUpperCase()}
-                                    </span>
-                                </div>
-                                <div style="font-size: 12px; color: #666;">
-                                    ${data.count} producto${data.count > 1 ? 's' : ''} encontrado${data.count > 1 ? 's' : ''}
-                                </div>
-                                <details style="margin-top: 8px;">
-                                    <summary style="cursor: pointer; font-size: 11px; color: #667eea; font-weight: 600;">Ver ejemplos</summary>
-                                    <div style="margin-top: 5px; padding: 8px; background: #f9fafb; border-radius: 4px; font-size: 11px;">
-                                        ${data.examples.map(ex => `
-                                            <div style="margin: 5px 0; padding: 5px 0; border-bottom: 1px solid #e5e7eb;">
-                                                <strong>${ex.name}...</strong><br>
-                                                Precio: ${formatPrice(ex.price)}<br>
-                                                <span style="color: #6b7280; word-break: break-all;">${ex.url}</span>
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                </details>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-                
-                ${nexmaqProducts.length === 0 ? `
-                    <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; border: 2px solid #ffc107;">
-                        <strong>⚠️ Posibles razones por las que NexMaq no aparece:</strong><br>
-                        <ol style="margin: 10px 0 0 20px; line-height: 1.8;">
-                            <li>El API no está devolviendo productos de NexMaq</li>
-                            <li>Los productos de NexMaq usan un nombre diferente en la respuesta</li>
-                            <li>La URL del API podría estar apuntando solo a competidores</li>
-                        </ol>
-                        <div style="margin-top: 10px; padding: 10px; background: white; border-radius: 6px; font-size: 12px;">
-                            <strong>💡 Recomendación:</strong> Verifica la configuración del backend o los scrapers para asegurarte que estén incluyendo NexMaq en las búsquedas.
-                        </div>
-                    </div>
-                ` : ''}
-            `;
-        }
-
         function displayResults(groupedProducts) {
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = '';
@@ -798,7 +804,6 @@
                 const card = document.createElement('div');
                 card.className = 'product-group';
                 
-                // Calcular precio mínimo
                 const prices = Object.entries(group.stores)
                     .filter(([_, data]) => data !== null)
                     .map(([store, data]) => ({ store, price: data.price }));
@@ -806,7 +811,6 @@
                 const minPrice = prices.length > 0 ? Math.min(...prices.map(p => p.price)) : null;
                 const nexmaqPrice = group.stores.nexmaq?.price;
                 
-                // Crear tarjetas de precio para cada tienda
                 const priceCards = STORES.map(storeName => {
                     const storeData = group.stores[storeName];
                     const isAvailable = storeData !== null;
@@ -826,20 +830,20 @@
                         if (diff < 0) {
                             priceDiffHtml = `
                                 <div class="price-difference cheaper">
-                                    ${percentage}% más barato que NexMaq
+                                    ↓ ${percentage}% más barato que NexMaq
                                 </div>
                             `;
                         } else if (diff > 0) {
                             priceDiffHtml = `
                                 <div class="price-difference expensive">
-                                    ${percentage}% más caro que NexMaq
+                                    ↑ ${percentage}% más caro que NexMaq
                                 </div>
                             `;
                         }
                     } else if (isNexmaq && isAvailable) {
                         priceDiffHtml = `
                             <div class="price-difference reference">
-                                Precio de referencia
+                                📍 Precio de referencia
                             </div>
                         `;
                     }
@@ -848,7 +852,7 @@
                         <div class="${cardClasses.join(' ')}">
                             <div class="store-header">
                                 <div class="store-name">${storeName.toUpperCase()}</div>
-                                ${isBest ? '<span class="store-badge best">MEJOR PRECIO</span>' : ''}
+                                ${isBest ? '<span class="store-badge best">🏆 MEJOR PRECIO</span>' : ''}
                                 ${isNexmaq && !isBest ? '<span class="store-badge nexmaq">NEXMAQ</span>' : ''}
                             </div>
                             <div class="price-value">
